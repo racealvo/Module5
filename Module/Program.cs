@@ -55,11 +55,15 @@ namespace Module
         private Teacher[] teachers = new Teacher[3];
 
         //// Course Info
-        public string CourseName { get; set; }
+        public string CourseName { get; private set; }
+        public int Credits { get; private set; }
+        public int Duration { get; private set; }
 
-        public Course(string courseName)
+        public Course(string courseName, int credits, int duration)
         {
             CourseName = courseName;
+            Credits = credits;
+            Duration = duration;
         }
 
         public bool AddStudent(Student student)
@@ -105,10 +109,12 @@ namespace Module
 
         // Degree Info
         public string DegreeName { get; set; }
+        public int CreditsRequired { get; private set; }
 
-        public Degree(string degree)
+        public Degree(string degree, int credits)
         {
             DegreeName = degree;
+            CreditsRequired = credits;
         }
 
         public bool AddCourse(Course course)
@@ -146,7 +152,7 @@ namespace Module
             {
                 bool bResponse;
 
-                Course course = new Course("Programming with C#");
+                Course course = new Course("Programming with C#", 3, 12);
 
                 bResponse = course.AddStudent(new Student("Johnny", "Doe", new DateTime(1998, 1, 1)));
                 bResponse = course.AddStudent(new Student("Suzy", "Smith", new DateTime(1998, 1, 31)));
@@ -154,7 +160,7 @@ namespace Module
 
                 bResponse = course.AddTeacher(new Teacher("Tom", "Brady", new DateTime(1977, 8, 3)));
 
-                Degree degree = new Module.Degree("Bachelor of Science");
+                Degree degree = new Module.Degree("Bachelor of Science", 30);
                 degree.AddCourse(course);
 
                 UProgram uProgram = new UProgram("Information Technology");
